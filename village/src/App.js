@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import styled from "styled-components";
 
 import "./App.css";
 import SmurfForm from "./components/SmurfForm";
@@ -10,7 +11,7 @@ const smurfData = {
   name: "",
   age: "",
   height: ""
-}
+};
 
 class App extends Component {
   constructor(props) {
@@ -49,24 +50,30 @@ class App extends Component {
   addData = () => {
     console.log("add happening");
     const newSmurf = this.state.smurf;
-
-    axios
-      .post(data, newSmurf)
-      .then(() => this.fetchData());
+    axios.post(data, newSmurf).then(() => this.fetchData());
   };
 
   render() {
     return (
-      <div className="App">
+      <StyledDiv>
+        <Smurfs smurfs={this.state.smurfs} />
         <SmurfForm
           smurf={this.state.smurf}
           handleInput={this.handleInput}
           addData={this.addData}
         />
-        <Smurfs smurfs={this.state.smurfs} />
-      </div>
+      </StyledDiv>
     );
   }
 }
+
+const StyledDiv = styled.div`
+  background-color: #e84545;
+  padding: 20px 0 40px 0;
+  max-width: 500px;
+  margin: 50px auto;
+  border-radius: 4px;
+  border: 1px solid #53354a;
+`;
 
 export default App;
